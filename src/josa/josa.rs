@@ -60,7 +60,7 @@ fn josa_picker(word: &str, josa: JosaOption) -> &str {
         return josa.to_strs().0;
     }
 
-    let has받침: bool = has_batchim::has_batchim(word, None);
+    let has받침: bool = has_batchim::has_batchim(word, has_batchim::KindOfBatchim::None);
     let mut index: bool = if has받침 { false } else { true };
 
     let is_종성_리을: bool = disassemble_complete_character::disassemble_complete_character(
