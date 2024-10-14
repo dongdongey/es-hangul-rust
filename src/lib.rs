@@ -18,4 +18,8 @@ pub trait Josa {
     fn josa(self, josa_option: josa::JosaOption) -> String;
 }
 
-pub mod get_choseong;
+pub mod get_choseong_mod;
+pub use get_choseong_mod::get_choseong;
+pub trait GetChoseong {
+    fn get_choseong(self) -> String;
+}

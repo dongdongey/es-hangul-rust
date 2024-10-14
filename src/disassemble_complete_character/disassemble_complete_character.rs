@@ -1,7 +1,5 @@
 use crate::_internal::constants;
 
-const NUMBER_OF_JUNGSEONG: usize = 21;
-
 pub struct ReturnTypeDisassembleCompleteCharacter {
     pub choseong: char,
     pub jungseong: char,
@@ -25,9 +23,9 @@ pub fn disassemble_complete_character(
 
     let jongseong_index: usize = hangul_code % constants::NUMBER_OF_JONGSEONG;
     let jungseong_index: usize =
-        (hangul_code / constants::NUMBER_OF_JONGSEONG) % NUMBER_OF_JUNGSEONG;
+        (hangul_code / constants::NUMBER_OF_JONGSEONG) % constants::NUMBER_OF_JUNGSEONG;
     let choseong_index: usize =
-        (hangul_code / constants::NUMBER_OF_JONGSEONG) / NUMBER_OF_JUNGSEONG;
+        (hangul_code / constants::NUMBER_OF_JONGSEONG) / constants::NUMBER_OF_JUNGSEONG;
 
     Some(ReturnTypeDisassembleCompleteCharacter {
         choseong: constants::CHOSEONGS[choseong_index],
