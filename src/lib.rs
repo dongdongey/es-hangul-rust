@@ -17,3 +17,5 @@ pub mod josa;
 pub trait Josa {
     fn josa(self, josa_option: josa::JosaOption) -> String;
 }
+
+pub mod get_choseong;

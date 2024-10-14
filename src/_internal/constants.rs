@@ -67,33 +67,65 @@ pub const fn disassemble_vowel(vowel: char) -> &'static str {
     }
 }
 
-pub static CHOSEONGS: &[&str] = &[
-    "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ",
-    "ㅌ", "ㅍ", "ㅎ",
+pub static CHOSEONGS: &[char] = &[
+    'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ',
+    'ㅌ', 'ㅍ', 'ㅎ',
 ];
 
-pub fn is_choseong(c: &str) -> bool {
+pub fn is_choseong(c: char) -> bool {
     CHOSEONGS.contains(&c)
 }
 
-pub static JUNSEONGS: &[&str] = &[
-    "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ",
-    "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ",
+pub static JUNSEONGS: &[char] = &[
+    'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ',
+    'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ',
 ];
 
-pub fn is_junseong(vowel: &str) -> bool {
+pub fn is_junseong(vowel: char) -> bool {
     JUNSEONGS.contains(&vowel)
 }
 
-pub static JONGSEONGS: &[&str] = &[
-    "", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ",
-    "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ",
+pub static JONGSEONGS: &[Option<char>] = &[
+    None,
+    Some('ㄱ'),
+    Some('ㄲ'),
+    Some('ㄳ'),
+    Some('ㄴ'),
+    Some('ㄵ'),
+    Some('ㄶ'),
+    Some('ㄷ'),
+    Some('ㄹ'),
+    Some('ㄺ'),
+    Some('ㄻ'),
+    Some('ㄼ'),
+    Some('ㄽ'),
+    Some('ㄾ'),
+    Some('ㄿ'),
+    Some('ㅀ'),
+    Some('ㅁ'),
+    Some('ㅂ'),
+    Some('ㅄ'),
+    Some('ㅅ'),
+    Some('ㅆ'),
+    Some('ㅇ'),
+    Some('ㅈ'),
+    Some('ㅊ'),
+    Some('ㅋ'),
+    Some('ㅌ'),
+    Some('ㅍ'),
+    Some('ㅎ'),
 ];
 
-pub fn get_disassembled_jongseong(jongseong: &str) -> Option<&'static str> {
-    if let Some(char) = jongseong.chars().next() {
-        Some(disassemble_consonant(char))
-    } else {
-        None
+#[inline]
+pub fn get_disassembled_jongseong(jongseong: Option<char>) -> Option<&'static str> {
+    match jongseong {
+        Some(c) => {
+            if JONGSEONGS.contains(&jongseong) {
+                return Some(disassemble_consonant(c));
+            } else {
+                return None;
+            }
+        }
+        None => None,
     }
 }

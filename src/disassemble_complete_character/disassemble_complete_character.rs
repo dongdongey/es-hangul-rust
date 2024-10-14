@@ -3,9 +3,9 @@ use crate::_internal::constants;
 const NUMBER_OF_JUNGSEONG: usize = 21;
 
 pub struct ReturnTypeDisassembleCompleteCharacter {
-    pub choseong: &'static str,
-    pub jungseong: &'static str,
-    pub jongseong: &'static str,
+    pub choseong: char,
+    pub jungseong: char,
+    pub jongseong: Option<char>,
 }
 
 // 완성된 한글 문자를 분해하는 함수
@@ -45,13 +45,13 @@ mod tests {
     #[test]
     fn jamoeum_bunly() {
         let g_a_g = disassemble_complete_character::disassemble_complete_character('각').unwrap();
-        assert_eq!(g_a_g.choseong, "ㄱ");
-        assert_eq!(g_a_g.jungseong, "ㅏ");
-        assert_eq!(g_a_g.jongseong, "ㄱ");
+        assert_eq!(g_a_g.choseong, 'ㄱ');
+        assert_eq!(g_a_g.jungseong, 'ㅏ');
+        assert_eq!(g_a_g.jongseong, Some('ㄱ'));
 
         let a = disassemble_complete_character('아').unwrap();
-        assert_eq!(a.choseong, "ㅇ");
-        assert_eq!(a.jungseong, "ㅏ");
-        assert_eq!(a.jongseong, "");
+        assert_eq!(a.choseong, 'ㅇ');
+        assert_eq!(a.jungseong, 'ㅏ');
+        assert_eq!(a.jongseong, None);
     }
 }

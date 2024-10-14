@@ -68,7 +68,7 @@ fn josa_picker(word: &str, josa: JosaOption) -> &str {
     )
     .unwrap()
     .jongseong
-        == "ㄹ";
+        == Some('ㄹ');
 
     let is_case_of_로 = has받침 && is_종성_리을 && 로_조사.contains(&josa);
 
