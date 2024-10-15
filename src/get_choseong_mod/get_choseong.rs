@@ -3,7 +3,7 @@ use crate::_internal::{
     hangul::is_hangul_charactor,
 };
 
-pub fn get_choseong(string: String) -> String {
+pub fn get_choseong(string: &str) -> String {
     let a: String = string
         .chars()
         .map(|c| -> char {
@@ -25,8 +25,5 @@ pub fn get_choseong(string: String) -> String {
 
 #[test]
 fn test() {
-    assert_eq!(
-        get_choseong("이 망할 fuck".to_string()),
-        "ㅇ ㅁㅎ fuck".to_string()
-    )
+    assert_eq!(get_choseong("이 망할 fuck"), "ㅇ ㅁㅎ fuck".to_string())
 }

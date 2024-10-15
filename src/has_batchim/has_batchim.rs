@@ -1,4 +1,7 @@
-use crate::_internal::constants::{self, get_disassembled_jongseong};
+use crate::_internal::{
+    constants::{self, get_disassembled_jongseong},
+    hangul::is_hangul_charactor,
+};
 
 pub enum KindOfBatchim {
     Single,
@@ -6,15 +9,12 @@ pub enum KindOfBatchim {
     None,
 }
 
-pub fn has_batchim(guljas: &str, option: KindOfBatchim) -> bool {
-    let last_char = match guljas.chars().last() {
-        Some(a) => a,
-        None => {
-            return false;
-        }
+pub fn has_batchim(gulja: char, option: KindOfBatchim) -> bool {
+    if is_hangul_charactor(gulja) {
+        return false;
     };
 
-    let char_code = last_char as usize;
+    let char_code = gulja as usize;
 
     let is_complete_hangul = constants::COMPLETE_HANGUL_START_CHARCODE <= char_code
         && char_code <= constants::COMPLETE_HANGUL_END_CHARCODE;
@@ -55,9 +55,9 @@ mod tests {
     use crate::has_batchim::has_batchim::KindOfBatchim;
     #[test]
     fn batchim___() {
-        assert_eq!(has_batchim("앗", KindOfBatchim::None), true);
-        assert_eq!(has_batchim("흙", KindOfBatchim::Double), true);
-        assert_eq!(has_batchim("흙", KindOfBatchim::Single), false);
-        assert_eq!(has_batchim("어", KindOfBatchim::None), false);
+        assert_eq!(has_batchim('앗', KindOfBatchim::None), true);
+        assert_eq!(has_batchim('흙', KindOfBatchim::Double), true);
+        assert_eq!(has_batchim('흙', KindOfBatchim::Single), false);
+        assert_eq!(has_batchim('어', KindOfBatchim::None), false);
     }
 }

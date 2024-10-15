@@ -1,5 +1,6 @@
 use crate::disassemble_complete_character;
 use crate::has_batchim;
+use crate::HasBatchim;
 
 #[derive(PartialEq)]
 pub enum JosaOption {
@@ -47,12 +48,12 @@ const 로_조사: &[JosaOption] = &[
     JosaOption::으로부터_로부터,
 ];
 
-pub fn josa(word: String, josa: JosaOption) -> String {
+pub fn josa(word: &str, josa: JosaOption) -> String {
     if word.len() == 0 {
-        return word;
+        return word.to_string();
     }
 
-    return word.clone() + josa_picker(word.as_str(), josa);
+    return word.to_string() + josa_picker(word, josa);
 }
 
 fn josa_picker(word: &str, josa: JosaOption) -> &str {
@@ -60,7 +61,7 @@ fn josa_picker(word: &str, josa: JosaOption) -> &str {
         return josa.to_strs().0;
     }
 
-    let has받침: bool = has_batchim::has_batchim(word, has_batchim::KindOfBatchim::None);
+    let has받침: bool = word.has_batchim(has_batchim::KindOfBatchim::None);
     let mut index: bool = if has받침 { false } else { true };
 
     let is_종성_리을: bool = disassemble_complete_character::disassemble_complete_character(
@@ -97,9 +98,6 @@ mod tests {
 
     #[test]
     fn josa_nani() {
-        assert_eq!(
-            josa("동동게이".to_string(), JosaOption::은_는),
-            "동동게이는".to_string()
-        );
+        assert_eq!(josa("동동게이", JosaOption::은_는), "동동게이는");
     }
 }
