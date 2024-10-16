@@ -10,21 +10,18 @@ pub enum KindOfBatchim {
 }
 
 pub fn has_batchim(gulja: char, option: KindOfBatchim) -> bool {
-    if is_hangul_charactor(gulja) {
+    if !is_hangul_charactor(gulja) {
         return false;
     };
 
     let char_code = gulja as usize;
 
-    let is_complete_hangul = constants::COMPLETE_HANGUL_START_CHARCODE <= char_code
-        && char_code <= constants::COMPLETE_HANGUL_END_CHARCODE;
-
-    if !is_complete_hangul {
-        return false;
-    }
-
     let jongseong_index =
         (char_code - constants::COMPLETE_HANGUL_START_CHARCODE) % constants::NUMBER_OF_JONGSEONG;
+
+    if jongseong_index == 0 {
+        return false; // 받침이 없는 경우
+    }
 
     match option {
         KindOfBatchim::Single => {
@@ -44,7 +41,7 @@ pub fn has_batchim(gulja: char, option: KindOfBatchim) -> bool {
             return false;
         }
         KindOfBatchim::None => {
-            return jongseong_index > 0;
+            return true;
         }
     };
 }
@@ -56,6 +53,8 @@ mod tests {
     #[test]
     fn batchim___() {
         assert_eq!(has_batchim('앗', KindOfBatchim::None), true);
+        assert_eq!(has_batchim('앗', KindOfBatchim::Double), false);
+        assert_eq!(has_batchim('앗', KindOfBatchim::Single), true);
         assert_eq!(has_batchim('흙', KindOfBatchim::Double), true);
         assert_eq!(has_batchim('흙', KindOfBatchim::Single), false);
         assert_eq!(has_batchim('어', KindOfBatchim::None), false);

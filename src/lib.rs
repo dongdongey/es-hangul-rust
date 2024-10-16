@@ -1,6 +1,13 @@
 mod _internal;
 pub mod disassemble;
+pub use disassemble::disassemble::{disassemble, disassemble_to_groups};
+pub trait Disassemble {
+    fn disassemble(&self) -> String;
+    fn disassemble_to_groups(&self) -> Vec<Vec<char>>;
+}
+
 pub mod disassemble_complete_character;
+pub use disassemble_complete_character::disassemble_complete_character as other_disassemble_complete_character;
 
 pub mod has_batchim;
 pub use has_batchim::{has_batchim as other_has_batchim, KindOfBatchim};

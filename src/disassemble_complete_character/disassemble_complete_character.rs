@@ -1,15 +1,13 @@
 use crate::_internal::constants;
 
-pub struct ReturnTypeDisassembleCompleteCharacter {
+pub struct DisassembledCompleteCharacter {
     pub choseong: char,
     pub jungseong: char,
     pub jongseong: Option<char>,
 }
 
 // 완성된 한글 문자를 분해하는 함수
-pub fn disassemble_complete_character(
-    letter: char,
-) -> Option<ReturnTypeDisassembleCompleteCharacter> {
+pub fn disassemble_complete_character(letter: char) -> Option<DisassembledCompleteCharacter> {
     let char_code: usize = letter as usize;
 
     // 주어진 문자가 완성된 한글인지 확인
@@ -27,7 +25,7 @@ pub fn disassemble_complete_character(
     let choseong_index: usize =
         (hangul_code / constants::NUMBER_OF_JONGSEONG) / constants::NUMBER_OF_JUNGSEONG;
 
-    Some(ReturnTypeDisassembleCompleteCharacter {
+    Some(DisassembledCompleteCharacter {
         choseong: constants::CHOSEONGS[choseong_index],
         jungseong: constants::JUNSEONGS[jungseong_index],
         jongseong: constants::JONGSEONGS[jongseong_index],
