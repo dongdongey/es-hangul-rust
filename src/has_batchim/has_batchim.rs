@@ -1,6 +1,6 @@
 use crate::_internal::{
     constants::{self, get_disassembled_jongseong},
-    hangul::is_hangul_charactor,
+    hangul::is_hangul_character,
 };
 
 pub enum KindOfBatchim {
@@ -10,7 +10,7 @@ pub enum KindOfBatchim {
 }
 
 pub fn has_batchim(gulja: char, option: KindOfBatchim) -> bool {
-    if !is_hangul_charactor(gulja) {
+    if !is_hangul_character(gulja) {
         return false;
     };
 

@@ -1,5 +1,5 @@
 #[inline]
-pub const fn is_hangul_charactor(c: char) -> bool {
+pub const fn is_hangul_character(c: char) -> bool {
     return '가' < c && c < '힣';
 }
 
@@ -9,5 +9,5 @@ pub const fn is_hangul_alphabet(c: char) -> bool {
 }
 #[inline]
 pub const fn is_hangul(c: char) -> bool {
-    return is_hangul_alphabet(c) && is_hangul_charactor(c);
+    return is_hangul_alphabet(c) && is_hangul_character(c);
 }

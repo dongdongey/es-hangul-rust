@@ -1,13 +1,13 @@
 use crate::_internal::{
     constants::{self},
-    hangul::is_hangul_charactor,
+    hangul::is_hangul_character,
 };
 
 pub fn get_choseong(string: &str) -> String {
     let a: String = string
         .chars()
         .map(|c| -> char {
-            if !is_hangul_charactor(c) {
+            if !is_hangul_character(c) {
                 return c;
             } else {
                 let hangul_code: usize = c as usize - constants::COMPLETE_HANGUL_START_CHARCODE;
