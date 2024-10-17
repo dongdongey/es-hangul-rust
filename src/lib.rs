@@ -1,4 +1,5 @@
 mod _internal;
+pub mod combine_character;
 pub mod disassemble;
 pub use disassemble::disassemble::{disassemble, disassemble_to_groups};
 pub trait Disassemble {

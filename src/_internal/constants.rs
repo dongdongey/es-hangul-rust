@@ -116,6 +116,10 @@ pub static JONGSEONGS: &[Option<char>] = &[
     Some('ㅎ'),
 ];
 
+pub fn is_jongseong(j: char) -> bool {
+    JONGSEONGS.contains(&Some(j))
+}
+
 #[inline]
 pub fn get_disassembled_jongseong(jongseong: Option<char>) -> Option<&'static str> {
     match jongseong {
